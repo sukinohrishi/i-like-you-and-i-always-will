@@ -306,6 +306,11 @@
   <canvas id="particles"></canvas>
   <div class="decor" id="decor"></div>
 
+  <!-- Background music (Massive Attack - Angel) -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="angel.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="container">
     <h1 class="title">I <span>Like</span> You</h1>
     <p class="subtitle">in sixty languages</p>
@@ -451,6 +456,11 @@
       startBtn.classList.add('hidden');
       heartGlow.classList.add('active');
 
+      // Start the music smoothly
+      const music = document.getElementById('bgMusic');
+      music.volume = 0.7;
+      music.play().catch(() => {});
+
       phraseEls.forEach((el, i) => {
         setTimeout(() => {
           el.classList.add('visible');
@@ -463,6 +473,13 @@
       setTimeout(() => {
         footerMsg.classList.add('show');
       }, phraseEls.length * 55 + 600);
+    });
+
+    // Try autoplay on load (may be blocked by browser)
+    window.addEventListener('load', () => {
+      const music = document.getElementById('bgMusic');
+      music.volume = 0.7;
+      music.play().catch(() => {});
     });
 
     const decor = document.getElementById('decor');
